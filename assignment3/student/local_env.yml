@@ -1,0 +1,10 @@
+name: cs224n_a3
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - numpy
+  - tqdm
+  - docopt
+  - pytorch
+  - torchvision
