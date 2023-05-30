@@ -90,6 +90,7 @@ class DownProjectBlock(nn.Module):
         super().__init__()
         ### YOUR CODE HERE
         ### Hint: Copy over the code from Block and make necessary modifications.
+        self.config = config
         self.ln1 = nn.LayerNorm(config.n_embd)
         self.ln2 = nn.LayerNorm(config.n_embd)
         self.ln3 = nn.LayerNorm(config.n_embd)
@@ -111,7 +112,8 @@ class DownProjectBlock(nn.Module):
         ### YOUR CODE HERE
         ### Hint: Copy over the code from Block and make necessary modifications.
         ### Should be around 3-5 lines.
-        x_input = x_input + self.attn(self.ln1(x_input), self.ln2(self.C))
+        #breakpoint()
+        x_input = self.attn(self.ln1(x_input), self.ln2(self.C))
         x_input = x_input + self.mlp(self.ln3(x_input))
         return x_input
     
@@ -139,7 +141,7 @@ class UpProjectBlock(nn.Module):
         x_input. 
         Use the layernorm layers on y, and then on the input to the MLP.
         """
-        x_input = x_input + self.attn(self.ln1(y), x_input)
+        x_input = self.attn(self.ln1(y), x_input)
         x_input = x_input + self.mlp(self.ln2(x_input))
         return x_input
     

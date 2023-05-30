@@ -101,7 +101,7 @@ if args.function == 'pretrain':
     #train_dataset = dataset.CharCorruptionDataset(text, args.block_size) 
     tconf = trainer.TrainerConfig(max_epochs=650, batch_size=128, learning_rate=args.pretrain_lr,
                       lr_decay=True, warmup_tokens=512*20, final_tokens=200*len(pretrain_dataset)*block_size,
-                      num_workers=0, writer=writer)
+                      num_workers=4, writer=writer)
     trainer = trainer.Trainer(model_obj, pretrain_dataset, None, tconf)
     trainer.train()
     torch.save(model_obj.state_dict(), args.writing_params_path)
@@ -147,9 +147,9 @@ elif args.function == 'finetune':
         max_epochs = 10
     else:
         max_epochs = 75
-    tconf = trainer.TrainerConfig(max_epochs=75, batch_size=256, learning_rate=args.finetune_lr,
+    tconf = trainer.TrainerConfig(max_epochs=max_epochs, batch_size=256, learning_rate=args.finetune_lr,
                     lr_decay=True, warmup_tokens=512*20, final_tokens=200*len(pretrain_dataset)*block_size,
-                    num_workers=0, writer=writer)
+                    num_workers=4, writer=writer)
     trainer = trainer.Trainer(model_obj, train_dataset, None, tconf)
     trainer.train()
     torch.save(model_obj.state_dict(), args.writing_params_path)
