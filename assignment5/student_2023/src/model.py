@@ -113,8 +113,8 @@ class DownProjectBlock(nn.Module):
         ### Hint: Copy over the code from Block and make necessary modifications.
         ### Should be around 3-5 lines.
         #breakpoint()
-        x_input = self.attn(self.ln1(x_input), self.ln2(self.C))
-        x_input = x_input + self.mlp(self.ln3(x_input))
+        x_input = self.attn(x_input, self.ln2(self.C))
+        x_input = self.mlp(self.ln3(x_input))
         return x_input
     
 class UpProjectBlock(nn.Module):
@@ -142,7 +142,7 @@ class UpProjectBlock(nn.Module):
         Use the layernorm layers on y, and then on the input to the MLP.
         """
         x_input = self.attn(self.ln1(y), x_input)
-        x_input = x_input + self.mlp(self.ln2(x_input))
+        x_input = self.mlp(self.ln2(x_input))
         return x_input
     
 
