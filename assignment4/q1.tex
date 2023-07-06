@@ -197,14 +197,17 @@ sh run.sh test
 \end{lstlisting}
     Please report the model's corpus BLEU Score. It should be larger than 18.
     
-    \ifans{}
+    \ifans{20.279}
     
     \part[4] (written) In class, we learned about dot product attention, multiplicative attention, and additive attention.  As a reminder, dot product attention is $\be_{t,i} = \bs_t^T\bh_i$, multiplicative attention is $\be_{t,i} = \bs_t^T\bW\bh_i$, and additive attention is $\be_{t,i} = \bv^T \text{tanh}(\bW_1\bh_i + \bW_2\bs_t)$.
     
     \begin{subparts}
     \subpart[2] Explain one advantage and one disadvantage of \textit{dot product attention} compared to multiplicative attention.
+
+    \ifans{One advantage of dot product attention over multiplicative attention is that it is less expensive to compute. One disadvantage is that it is less general. }
     \subpart[2] Explain one advantage and one disadvantage of \textit{additive attention} compared to multiplicative attention.
+
+    \ifans{One advantage of dot product attention over additive attention is that it is more interpretable - you can see which elements of the vector $h_i$ are picked out by $s_i$. One advantage of the additive attention is that a non-linear function (tanh) is applied to the vector components before projection. This can potentially allow some non-linear interactions between components of each vector.}
     \end{subparts}
             
-    \ifans{}
 \end{parts}
